@@ -1,0 +1,38 @@
+<%- include('header'); -%>
+    <div class="box" id="heading">
+       <h1><%= listtitle %></h1>
+    </div>
+    
+    <div class="box">
+
+
+       <%for(var i=0;i < newlistitems.length ;i++){ %>
+         <form action="/delete" method="post"autocomplete="false" >
+        <div class="item">
+           <%if(i>2){ %>
+            <input type="checkbox" name="checkbox" value="<%=newlistitems[i]._id%>" onChange="this.form.submit()">
+           <%}%>
+           <%if(i>2){ %>
+            <p> <%= newlistitems[i].name %> </p>
+          <%}%>
+
+          <%if(i <= 2){ %>
+            <p> <em style="font-weight: bold;"><%= newlistitems[i].name %> </em></p>
+          <%}%>
+           <input type="hidden"  name="ListName" value=<%=listtitle%> >
+        </div>
+        </form>
+        <%}%>
+
+
+
+        <form  class="item" action="/" method="post">
+        <input type="text" name="newitem" placeholder="New Item" autocomplete="false">
+         <button type="submit" name="list" autocomplete="address-level4" value=<%=listtitle%> >+</button>
+        
+    </form>
+     
+    </div>
+    
+   
+<%- include('footer'); -%>
