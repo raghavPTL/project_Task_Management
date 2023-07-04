@@ -1,0 +1,52 @@
+<%- include('header'); -%>
+    <div class="box" id="heading">
+       <h1>Task Manager</h1>
+    </div>
+    
+    <div class="box">
+
+    <div class="center-container">
+         <ul class="instructions">
+            <li class="instruction">Add new task by entering in  below input box and click on + button</li>
+            <li class="instruction">For detail of subtasks click on that Main Task  </li>
+            <li class="instruction">Delete task by checking  checkbox</li>
+            </ul>
+      </div>
+       
+
+
+    <% lists.forEach(function(list) { %>
+
+        <form action="/delete_sec" method="post"autocomplete="false" >
+        <div class="item">
+          
+            <table>
+                <tr> 
+                    <input class = "checkclass " type="checkbox" name="checkbox" value="<%=list._id %>" onChange="this.form.submit()">
+                </tr>
+                <tr>
+                    <a href = "/posts/<%=list._id %> " ><p> <%= list.name %> </p></a>  
+                </tr>
+            </table>
+           
+            
+        </div>
+        </form>
+
+
+
+      <% list.itemsofsaperateList.forEach(function(item) { %>
+       
+      <% }); %>
+    <% }); %>
+
+
+        <form  class="item" action="addnewtask" method="post">
+        <input     type="text" name="newsec" placeholder="Add New Task" autocomplete="false">
+        <button class="but" type="submit" name="list" autocomplete="address-level4" value="" >+</button>
+        </form>
+     
+    </div>
+    
+   
+<%- include('footer'); -%>

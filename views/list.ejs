@@ -1,38 +1,229 @@
-<%- include('header'); -%>
-    <div class="box" id="heading">
-       <h1><%= listtitle %></h1>
-    </div>
-    
-    <div class="box">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+html {
+  background-color: #d7dae5;
+  
+  min-height: 1000px;
+  font-family: 'helvetica neue';
+}
 
+h1 {
+  color: #fff;
+  padding: 10px;
+}
 
-       <%for(var i=0;i < newlistitems.length ;i++){ %>
-         <form action="/delete" method="post"autocomplete="false" >
-        <div class="item">
-           <%if(i>2){ %>
-            <input type="checkbox" name="checkbox" value="<%=newlistitems[i]._id%>" onChange="this.form.submit()">
-           <%}%>
-           <%if(i>2){ %>
-            <p> <%= newlistitems[i].name %> </p>
-          <%}%>
+.box {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
 
-          <%if(i <= 2){ %>
-            <p> <em style="font-weight: bold;"><%= newlistitems[i].name %> </em></p>
-          <%}%>
-           <input type="hidden"  name="ListName" value=<%=listtitle%> >
-        </div>
+#heading {
+  background-color: #71d9a5;
+  text-align: center;
+}
+
+.item {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+input:checked+p {
+  text-decoration: line-through;
+  text-decoration-color: #71d9a5;
+}
+
+input[type="checkbox"] {
+  margin: 20px;
+}
+input[readonly] {
+  cursor: text;
+  background-color: #fff;
+}
+p {
+  margin: 0;
+  padding: 10px;
+  
+}
+a{
+      color: #333333;
+      font-weight: bold;
+      
+      text-decoration: none;
+      transition: all 0.3s ease;
+       text-decoration: underline;
+}
+a:hover {
+  font-weight: normal;
+  color: #4aa755;
+ 
+}
+form.item{
+  text-align: center;
+  margin-left: 20px;
+}
+
+.but {
+  min-height: 50px;
+  width: 50px;
+  border-radius: 30%;
+  border-color: transparent;
+  background-color: #71d9a5;
+  color: #fff;
+  font-size: 30px;
+  padding-bottom: 6px;
+  border-width: 0;
+   border-right-width: 0px;
+      margin-right: 10px;
+        padding-top: 6px;
+}
+.but:hover {
+  background-color: #42a469;
+  /* Green */
+  color: white;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  text-align: center;
+  height: 60px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  width: 313px;
+}
+
+input[type="text"] {
+  outline: none;
+  box-shadow: inset 0 -3px 0 0 #71d9a5;
+}
+
+::placeholder {
+  color: grey;
+  opacity: 1;
+}
+
+footer {
+  color: white;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.bttn {
+   color: #333333;
+   font-weight: bold;
+  -webkit-border-radius: 11;
+  -moz-border-radius: 11;
+  border-radius: 11px;
+  font-family: Arial;
+ 
+  font-size: 20px;
+  background:  #71d9a5;;
+  padding: 9px 20px 10px 20px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+  align-self: center;
+  left: 80%;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+}
+.center-containersecond {
+  width: 70%;
+  justify-content: center;
+}
+.bttn:hover {
+  background: #7fffb9;
+  text-decoration:underline;
+  cursor: pointer;
+}
+.checkclass{
+    cursor: pointer;
+}
+.checkclass:hover {
+  background-color: #f0f0f0;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.instructions {
+  list-style-type: disc;
+  text-align:left;
+  padding-left: 0;
+}
+
+.instruction {
+  font-weight: 200;
+}
+
+   </style>
+
+    <link rel="icon" href="data:,">
+
+</head>
+<body>
+   <div class="box" id="heading">
+      <h1>
+         <%= cur.name %>
+      </h1>
+   </div>
+
+   <div class="box">
+       
+      
+      <%for(var i=0;i < cur.itemsofsaperateList.length ;i++){ %>
+         <form action="/delete" method="post" autocomplete="false">
+            <div class="item">
+              
+                 <table>
+                  <tr>
+                     <input class = "checkclass" type="checkbox" name="checkbox" value="<%=cur.itemsofsaperateList[i].name%>"
+                     onChange="this.form.submit()">
+                  </tr>
+                  <tr>
+                     <p>
+                           <%= cur.itemsofsaperateList[i].name %>
+                          
+                        </p>
+                  </tr>
+                 </table>
+                  
+                  
+                        
+                  <input type="hidden"  name="pageid" value=<%= cur._id%> >
+            </div>
+         </form>
+      <%}%>
+
+        <form class="item" action="/addnewgoal" method="post">
+        <input  type="text" name="newgoal" placeholder="Add New Sub-task" autocomplete="false">
+        <button class="but"  type="submit" name="sub" autocomplete="address-level4" value="<%= cur._id %>">+</button>
         </form>
-        <%}%>
 
+   </div>
 
+      
+      <div class="center-container">
+      <button class = "bttn" onclick="window.location.href = '/but';">Go to Home</button>
+      </div>
 
-        <form  class="item" action="/" method="post">
-        <input type="text" name="newitem" placeholder="New Item" autocomplete="false">
-         <button type="submit" name="list" autocomplete="address-level4" value=<%=listtitle%> >+</button>
-        
-    </form>
-     
-    </div>
-    
-   
-<%- include('footer'); -%>
+     <h3 align="center">&copy;2022  Raghav Patel </h3>
+</body>
+</html>
